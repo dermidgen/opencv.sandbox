@@ -1,6 +1,7 @@
 var scrape = function()
 {
 	this.tiles = [];
+	this.tileStash = [];
 	
 	var latlng = new google.maps.LatLng(33.6465, -117.688);
 	var myOptions = {
@@ -20,21 +21,25 @@ var scrape = function()
 		self.tiles = self.unique(self.tiles);
 	};
 	
-    this.map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    //this.map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     
-    google.maps.event.addListener(this.map,'tilesloaded', onTilesLoaded);
-//    google.maps.event.addListener(this.map,'zoom_changed', onTilesLoaded);
-//    google.maps.event.addListener(this.map,'bounds_changed', onTilesLoaded);
-//    google.maps.event.addListener(this.map,'dragend', onTilesLoaded);
-//    google.maps.event.addListener(this.map,'idle', onTilesLoaded);
-//    google.maps.event.addListener(this.map,'resize', onTilesLoaded);
-//    google.maps.event.addListener(this.map,'maptypeid_changed', onTilesLoaded);
+    //google.maps.event.addListener(this.map,'tilesloaded', onTilesLoaded);
 };
 
 /** PUBLIC METHODS **/
 scrape.prototype.getMap = function()
 {
 	return this.map;
+};
+
+scrape.prototype.stashTiles = function()
+{
+	this.tileStash.push(this.tiles);
+};
+
+scrape.prototype.clearTiles = function()
+{
+	this.tiles = [];
 };
 
 scrape.prototype.getTiles = function()

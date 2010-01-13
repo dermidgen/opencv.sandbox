@@ -18,25 +18,78 @@
 	</script>
 	
 	<style>
-		#logWin {
-			position: absolute;
-			top: 50px;
-			left: 50px;
-			background: #fff;
-			overflow: auto;
-			width: 1000px;
-			height: 250px;
-			border: 2px solid #000;
-		}
+	body {
+		font-family: Arial, Verdana, Helvetica, sans-serif;
+		font-size: 13px;
+	}
+
+	#panels {
+		position: absolute;
+		top: 50px;
+		left: 50px;
+	}
+
+	#logWin, #dataWin {
+		background: #fff;
+		width: 1000px;
+		border: 2px solid #000;
+		padding: 8px;
+		margin: 0 0 20px 0;
+	}
+	
+	#dataWin {
+		display:none;
+	}
+	
+	#dumpLog, #dataLog {
+		height: 200px;
+		width: 100%;
+		overflow: auto;
+		font-size: 11px;
+		border: 0;
+		font-family: Courier New, Courier, Monoscript, sans-serif;
+		resize: vertical;
+	}
+	
+	#dataLog {
+		font-size: 9px;
+	}
+	
+	legend {
+		font-weight: bold;
+	}
 	</style>
 
 </head>
 
 <body onload="initialize();" onunload="GUnload();">
 	<div id="map_canvas" style="width: 100%; height: 800px"></div>
-	<div id="logWin">
-		<button onclick="scrape.getInstance().dumpTiles();">Dump Log</button>
-		<div id="dumpLog"></div>
+	<div id="panels">
+		
+		<div id="logWin">
+			<fieldset>
+				<legend>Data Set Sample Selector</legend>
+				<p>Specify a location to poll for sample data.  When all passes have completed,
+				take the data from the log window and paste it into scrape.js.out</p>
+				
+				Location: <input name="location" type="text" size="30" value="Lake Forest, CA"/>
+				<button>Start</button>
+	
+			</fieldset>
+			<br/>
+			<fieldset>
+				<legend>Output Log</legend>
+				<div id="dumpLog">Starting up...</div>
+			</fieldset>
+		</div>
+		<div id="dataWin">
+			<fieldset>
+				<legend>Data Log</legend>
+				<div><button>Select All</button> Save this data to scrape.js </div>
+				<textarea id="dataLog"></textarea>
+			</fieldset>
+		</div>
+		
 	</div>
 </body>
 </html>
